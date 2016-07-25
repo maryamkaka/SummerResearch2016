@@ -1,15 +1,15 @@
 clear; clc;
 
-%variables
-toneLength = 0.2;
-restLength = 1; 
-P300Events = [27, 29, 35, 39, 47];
-numEvents = 47; 
-fs = 1000; 
-dataOffset = 1000;
+%Constants (Data measurement parameters)
+TONE_LENGTH = 0.2;
+REST_LENGTH = 1; 
+P300_Events = [27, 29, 35, 39, 47];
+nEVENTS = 47; 
+Fs = 1000; 
+DATA_OFFSET = 1000;
 
-ISI = toneLength + restLength;
-time = [0:1/fs:ISI] - 0.2;
+ISI = TONE_LENGTH + REST_LENGTH;
+time = [0:1/Fs:ISI] - TONE_LENGTH;
 
 %select file
 [filename, pathname] = uigetfile({'*.csv','Comma Seperated Values (*.csv)'; ...
@@ -20,9 +20,9 @@ data = data(:, 1:end-2);
 headings = data.Properties.VariableNames;
 
 for i = 2:size(data, 2)
-    segmentedData(i-1,:,:) = reshape(data.(i)(dataOffset+1:fs*ISI*numEvents+dataOffset), fs*ISI, [])';
-    for j = 1:length(P300Events)
-        P300(i-1, j, :) = segmentedData(i-1, P300Events(j), :);
+    segmentedData(i-1,:,:) = reshape(data.(i)(DATA_OFFSET+1:Fs*ISI*nEVENTS+DATA_OFFSET), Fs*ISI, [])';
+    for j = 1:length(P300_Events)
+        P300(i-1, j, :) = segmentedData(i-1, P300_Events(j), :);
     end 
     
     averagedData(i-1, :) = mean(P300(i-1, :, :));

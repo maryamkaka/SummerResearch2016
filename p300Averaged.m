@@ -20,9 +20,9 @@ data = data(:, 1:end-2);
 headings = data.Properties.VariableNames;
 
 for i = 2:size(data, 2)
-    segmentedData = reshape(data.(i)(dataOffset+1:fs*ISI*numEvents+dataOffset), fs*ISI, [])';
+    segmentedData(i-1,:,:) = reshape(data.(i)(dataOffset+1:fs*ISI*numEvents+dataOffset), fs*ISI, [])';
     for j = 1:length(P300Events)
-        P300(j, :) = segmentedData(P300Events(j), :);
+        P300(j, :) = segmentedData(i-1, P300Events(j), :);
     end 
     
     averagedData(i-1, :) = mean(P300);

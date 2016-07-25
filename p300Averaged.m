@@ -22,10 +22,10 @@ headings = data.Properties.VariableNames;
 for i = 2:size(data, 2)
     segmentedData(i-1,:,:) = reshape(data.(i)(dataOffset+1:fs*ISI*numEvents+dataOffset), fs*ISI, [])';
     for j = 1:length(P300Events)
-        P300(j, :) = segmentedData(i-1, P300Events(j), :);
+        P300(i-1, j, :) = segmentedData(i-1, P300Events(j), :);
     end 
     
-    averagedData(i-1, :) = mean(P300);
+    averagedData(i-1, :) = mean(P300(i-1, :, :));
     
     %plot
     figure(i-1)

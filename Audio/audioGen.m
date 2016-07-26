@@ -4,7 +4,7 @@ function [sound, sequence] = audioGen()
     f2 = 500;                   %odd tone freq
     toneLength = 0.2;           %length of time tone is played (sec)
     restTime = 1;               %length of rest time (sec)
-    count = 5;                  %number of odd tones 
+    count = 10;                 %number of odd tones 
     thresh = 0.2;               %freq of odd tone
     
     %other variables
@@ -17,7 +17,7 @@ function [sound, sequence] = audioGen()
     oddCount = 0; 
        
     while true
-        if(random('unif', 0, 1) >= thresh)
+        if(random('unif', 0, 1) >= thresh || f == f2)
             f = f1;
         else 
             f = f2; 

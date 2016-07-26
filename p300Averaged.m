@@ -19,6 +19,11 @@ data = data(:, 1:end-2);
 
 headings = data.Properties.VariableNames;
 
+%detrending data
+for i = 2:size(data,2)
+    data.(i) = detrend(data.(i));
+end 
+
 for i = 2:size(data, 2)
     segmentedData(i-1,:,:) = reshape(data.(i)(DATA_OFFSET+1:Fs*ISI*nEVENTS+DATA_OFFSET), Fs*ISI, [])';
     for j = 1:length(P300_Events)

@@ -1,10 +1,10 @@
 function [sound, sequence] = audioGen()
-    %parameters8
+    %parameters
     f1 = 250;                   %reg tone freq
     f2 = 500;                   %odd tone freq
     toneLength = 0.2;           %length of time tone is played (sec)
     restTime = 1;               %length of rest time (sec)
-    count = 10;                 %number of odd tones 
+    count = 20;                 %number of odd tones 
     thresh = 0.2;               %freq of odd tone
     
     %other variables

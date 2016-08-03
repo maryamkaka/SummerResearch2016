@@ -4,7 +4,7 @@ clear;
 TONE_LENGTH = 0.2;
 REST_LENGTH = 1;
 Fs = 1000; 
-DATA_OFFSET = 1000;
+DATA_OFFSET = Fs;
 ODD_FREQ = 500;
 
 ISI = TONE_LENGTH + REST_LENGTH;
@@ -12,7 +12,7 @@ time = [0:1/Fs:ISI] - TONE_LENGTH;
 
 %% Data Import 
 % import EEG data file
-[filename, pathname] = uigetfile({'*.csv','Comma Seperated Values (*.csv)'; ...s
+[filename, pathname] = uigetfile({'*.csv','Comma Seperated Values (*.csv)'; ...
    '*.*',  'All Files (*.*)'}, 'Select a file');
 data = readtable([pathname, filename]); 
 data = data(:, 1:end-2);
@@ -26,9 +26,12 @@ nEvents = length(s.sequence);
 
 headings = data.Properties.VariableNames;
 
-%% detrending data
-for i = 2:size(data,2)
-    data.(i) = detrend(data.(i));
+%% detrending and filtering data
+for i = 2:size(data,2)   
+%    [b, a] = butter(6, 0.1);
+%    data.(i) = filtfilt(b, a, data.(i));
+    
+   data.(i) = detrend(data.(i));
 end 
 
 %% Data Extraction, Segmentation and Averaging

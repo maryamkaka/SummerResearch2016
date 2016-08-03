@@ -4,7 +4,7 @@ function [audio, sequence] = playAudio()
     f2 = 500;                   %odd tone freq
     toneLength = 0.2;           %lenght of time tone is played (sec)
     restTime = 1;               %length of rest time (sec)
-    count = 5;                  %number of odd tones 
+    count = 20;                  %number of odd tones 
     thresh = 0.2;               %freq of odd tone
     s = serial('COM3');         %Arduino Port
     

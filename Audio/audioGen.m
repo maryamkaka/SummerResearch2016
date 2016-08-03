@@ -1,4 +1,4 @@
-function [sound, sequence] = audioGen()
+function [audio, sequence] = audioGen()
     %parameters
     f1 = 250;                   %reg tone freq
     f2 = 500;                   %odd tone freq
@@ -12,7 +12,7 @@ function [sound, sequence] = audioGen()
     t = [0:1/fs:toneLength];    
     blank = zeros(1, fs*restTime);
     tone = @(f) sin(2*pi*f*t);
-    sound = [blank, tone(f1), blank];
+    audio = [blank, tone(f1), blank];
     sequence = [f1];
     oddCount = 0; 
        
@@ -25,7 +25,7 @@ function [sound, sequence] = audioGen()
         end 
         
         sequence = [sequence f]; 
-        sound = [sound tone(f) blank];
+        audio = [audio tone(f) blank];
         
         if(oddCount == count) 
             break;
